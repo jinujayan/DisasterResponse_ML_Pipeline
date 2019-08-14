@@ -30,4 +30,11 @@ This database is then used by the train_classifier to generate a model to be lat
 3. Go to http://0.0.0.0:3001/
 
 ## Results
+__Home Page__
+<br>
 
+![](https://github.com/jinujayan/DisasterResponse_ML_Pipeline/blob/master/images/HomePage_top.png)
+
+__Category class distribution__
+<br>
+![](https://github.com/jinujayan/DisasterResponse_ML_Pipeline/blob/master/images/Barplot_group.png)
