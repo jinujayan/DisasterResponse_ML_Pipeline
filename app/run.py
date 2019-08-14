@@ -32,7 +32,7 @@ def tokenize(text):
 # load data
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('disaster_messages', engine)
-
+Y = df.iloc[:,4:]
 # load model
 model = joblib.load("../models/model.pkl")
 
@@ -46,6 +46,18 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+    
+    
+    ## To display the class distribution of each column
+    col_distribution = {}
+    for col in Y.columns:
+        col_distribution[col] = df[col].value_counts().to_dict()
+    
+    zero_class = [col_distribution[col][0.0] for col in col_distribution]
+    one_class = [ df.shape[0]-zc for zc in zero_class ]
+    one_class_percent = [ round(oc*100/df.shape[0],2) for oc in one_class]
+    zero_class_percent = [ round(100-oc,2) for oc in one_class_percent]
+   
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -67,11 +79,39 @@ def index():
                     'title': "Genre"
                 }
             }
+        },
+        {
+            'data': [
+                    Bar(
+                    x=Y.columns,
+                    y=one_class_percent,
+                    name="Class_One" 
+                        ),
+                Bar(
+                    x=Y.columns,
+                    y=zero_class_percent,
+                    name="Class_Zero"
+                        )
+                   ],
+                'layout': {
+                'title': 'Class distribution within categories',
+                 'barmode':'group',
+                  
+                'yaxis': {
+                    'title': "Percentage"
+                },
+                'xaxis': {
+                    'title': "Categories",
+                    'tickangle':'-45'
+                }
+            }
+               
         }
     ]
     
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
+    print(ids)
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
     
     # render web page with plotly graphs
