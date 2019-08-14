@@ -1,0 +1,10 @@
+pandas
+flask
+numpy
+sklearn
+nltk
+sqlalchemy
+spacy
+plotly
+
+	
