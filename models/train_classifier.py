@@ -37,6 +37,14 @@ nltk.download(['punkt', 'wordnet','averaged_perceptron_tagger','stopwords'])
 
 
 def load_data(database_filepath):
+    '''Method to load data from database
+    
+    Parameters:
+    argument1 : Path of the database file
+    
+    Returns:
+    a valid dataframe
+    '''
     engine = create_engine(f"sqlite:///{database_filepath}")
     df = pd.read_sql_table('disaster_messages',engine)
     print("Data loading complete...")
@@ -92,6 +100,16 @@ def build_model():
     return pipeline
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''Method to evaluate the model and display f-scores for each category
+    
+    Parameters:
+    argument1 : trained model
+    argument2 : Data for evaluation
+    argument3 : Labels for evaluation
+    argument4 : List of categories
+
+    Returns : None
+    '''
     y_preds = model.predict(X_test)
     for pred, label, col in zip(y_preds.transpose(), Y_test.values.transpose(), Y_test.columns):
     #print(classification_report(label, pred))
@@ -101,6 +119,14 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    '''Method to save the trained model to local filesystem
+    
+    Parameters:
+    argument1 : trained model
+    argument2 : full local path for the model to be saved
+
+    Returns : None
+    '''
     mpath = Path(model_filepath)
     parent = mpath.parent
     if (parent.exists()):
@@ -125,8 +151,6 @@ def main():
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
         
         print('Building model...')
-        nounclass = Noun_POSCount()
-        nounclass.transform(X_train[:5])
         model = build_model()
         print('Building model complete...go for fit...')
         
