@@ -8,13 +8,13 @@ Classify request for help messages recevied during or after a disaster
 4. [Results](#results)
 
 ## Installation
-With Python 3.6 installed, ensure the packages in the requirements.txt are available.
-Note: Once spacy is successfully installed , pelase download the best-matching version of specific model for that spaCy installation by running the below command
+With Python 3.6 installed, ensure the packages in the requirements.txt are available.<br>
+__Note:__ Once spacy is successfully installed , please download the best-matching version of specific model for that spaCy installation by running the below command <br><br>
 python -m spacy download en_core_web_sm
 
 ## Input
-The input data is in the form of csv files, they are used by the preprocessing script process_data.py to geenrate a formatted data and stored as a database file.
-This database is then used by the train_classifier to generate a model to be later used by webapp for perfroming predictions.
+The input data is in the form of csv files, they are used by the preprocessing script process_data.py to generate a formatted data and stored as a database file.
+This database is then used by the train_classifier to generate a model to be later used by webapp for performing predictions.
 
 ## Execute
 1. Run the following commands in the project's root directory to set up your database and model.
