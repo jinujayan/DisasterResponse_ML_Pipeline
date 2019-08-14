@@ -29,7 +29,7 @@ This database is then used by the train_classifier to generate a model to be lat
 
 3. Go to http://0.0.0.0:3001/
 
-__Note :__ If there is an error of helper_class module not found, then update the system path with current path to models directory in the file run.py<br>
+__Note :__ If there is an error of helper_class module not found, then update the system path with current path to models directory in the file run.py <br>
 sys.path.append('/home/workspace/models')
 
 ## Results
